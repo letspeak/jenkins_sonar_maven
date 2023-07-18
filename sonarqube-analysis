@@ -1,23 +1,20 @@
-node{
+pipeline {
+  agent any
    stage('SCM Checkout'){
-     git 'https://github.com/jenkins_sonar_maven/sonarqube-analysis'
+     git 'https://github.com/jenkins_sonar_maven/'
    }
    stage('Compile-Package'){
       // Get maven home path
       sh 'mvn -B -DskipTests clean package'
    }
-   
    stage('SonarQube Analysis') {
         withSonarQubeEnv('LocalSonarCube') { 
           sh 'mvn sonar:sonar'
         }
     }
-   
    stage('Email Notification'){
       mail bcc: '', body: '''Hi Welcome to jenkins email alerts
       Thanks
       Duck Duck Go''', cc: '', from: '', replyTo: '', subject: 'Jenkins Job', to: 'ubmbto5n@duck.com'
    }
-   
-
 }
