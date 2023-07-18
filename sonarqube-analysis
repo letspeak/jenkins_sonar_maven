@@ -1,6 +1,6 @@
 node{
    stage('SCM Checkout'){
-     git 'https://github.com/jenkins_sonar_maven'
+     git 'https://github.com/letspeak/jenkins_sonar_maven'
    }
    stage('Compile-Package'){
       // Get maven home path
