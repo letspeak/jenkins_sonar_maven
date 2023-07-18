@@ -1,12 +1,11 @@
-pipeline {
-  agent any
+node{
    stage('SCM Checkout'){
      git 'https://github.com/jenkins_sonar_maven/'
    }
    stage('Compile-Package'){
       // Get maven home path
       sh 'mvn -B -DskipTests clean package'
-   }
+   }   
    stage('SonarQube Analysis') {
         withSonarQubeEnv('LocalSonarCube') { 
           sh 'mvn sonar:sonar'
